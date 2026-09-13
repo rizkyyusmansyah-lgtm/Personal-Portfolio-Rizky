@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { MapPin, GraduationCap, Briefcase, Sparkles } from 'lucide-react';
 import { LanyardCard } from '../ui/LanyardCard';
+import { useLanguage } from '@/context/LanguageContext';
 
 export const About = () => {
+  const { t, language } = useLanguage();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -41,18 +43,14 @@ export const About = () => {
 
           {/* Text Column */}
           <motion.div variants={itemVariants} className="lg:col-span-7">
-            <h2 className="text-sm font-mono tracking-[0.2em] text-primary uppercase mb-3">About Me</h2>
+            <h2 className="text-sm font-mono tracking-[0.2em] text-primary uppercase mb-3">{t.about.tag}</h2>
             <h3 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6">
-              Translating Data into <span className="text-gradient">Intelligent Solutions</span>
+              {t.about.title} <span className="text-gradient">{t.about.titleHighlight}</span>
             </h3>
             
             <div className="text-muted-foreground space-y-4 mb-8 text-lg">
-              <p>
-                Hello! I'm Rizky Yusmansyah, a fresh graduate in Informatics from Universitas Syiah Kuala (USK) with a Cumlaude predicate (GPA 3.67/4.00). Originally from Aceh, I have a deep passion for solving complex problems through data.
-              </p>
-              <p>
-                My focus lies at the intersection of Artificial Intelligence, Deep Learning, and Data Science. I enjoy building models that can understand the world, from classifying Indonesian herbal plants using CNNs to analyzing geospatial data with Google Earth Engine.
-              </p>
+              <p>{t.about.p1}</p>
+              <p>{t.about.p2}</p>
             </div>
 
             {/* Quick Facts Grid */}
@@ -62,8 +60,8 @@ export const About = () => {
                   <GraduationCap className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Education</h4>
-                  <p className="text-sm text-muted-foreground">B.Tech Informatics<br/>Universitas Syiah Kuala</p>
+                  <h4 className="text-white font-semibold mb-1">{t.about.edu}</h4>
+                  <p className="text-sm text-muted-foreground whitespace-pre-line">{t.about.eduDesc}</p>
                 </div>
               </div>
               
@@ -72,8 +70,8 @@ export const About = () => {
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Location</h4>
-                  <p className="text-sm text-muted-foreground">Banda Aceh, Indonesia</p>
+                  <h4 className="text-white font-semibold mb-1">{t.about.loc}</h4>
+                  <p className="text-sm text-muted-foreground">{t.about.locDesc}</p>
                 </div>
               </div>
               
@@ -82,8 +80,8 @@ export const About = () => {
                   <Sparkles className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Focus</h4>
-                  <p className="text-sm text-muted-foreground">AI, Machine Learning & Data Science</p>
+                  <h4 className="text-white font-semibold mb-1">{t.about.focus}</h4>
+                  <p className="text-sm text-muted-foreground">{t.about.focusDesc}</p>
                 </div>
               </div>
 
@@ -92,8 +90,8 @@ export const About = () => {
                   <Briefcase className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Status</h4>
-                  <p className="text-sm text-muted-foreground">Fresh Graduate<br/>Available for work</p>
+                  <h4 className="text-white font-semibold mb-1">{language === 'id' ? 'Status' : 'Status'}</h4>
+                  <p className="text-sm text-muted-foreground whitespace-pre-line">{language === 'id' ? 'Fresh Graduate\nTersedia untuk Bekerja' : 'Fresh Graduate\nAvailable for work'}</p>
                 </div>
               </div>
             </div>

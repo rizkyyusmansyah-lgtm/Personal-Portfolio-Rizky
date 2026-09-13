@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import { experiences } from '@/data/experience';
 import { Calendar, MapPin, Building2 } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 const TimelineCurve = ({ isEven }: { isEven: boolean }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -60,13 +61,14 @@ const TimelineCurve = ({ isEven }: { isEven: boolean }) => {
 };
 
 export const ExperienceSection = () => {
+  const { t } = useLanguage();
   return (
     <section id="experience" className="py-24 relative overflow-hidden bg-background/50">
       <div className="container mx-auto px-6 lg:px-12 max-w-5xl">
         <div className="text-center mb-16">
-          <h2 className="text-sm font-mono tracking-[0.2em] text-primary uppercase mb-3">Journey</h2>
+          <h2 className="text-sm font-mono tracking-[0.2em] text-primary uppercase mb-3">{t.experience.tag}</h2>
           <h3 className="text-3xl md:text-5xl font-heading font-bold text-foreground">
-            Experience & Education
+            {t.experience.title}
           </h3>
         </div>
 

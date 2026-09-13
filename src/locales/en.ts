@@ -1,0 +1,61 @@
+﻿export const en = {
+  nav: {
+    about: "About",
+    tech: "Tech Stack",
+    experience: "Experience",
+    projects: "Projects",
+    contact: "Contact",
+  },
+  hero: {
+    greeting: "Hello! I am",
+    title: "Turning Data Into Intelligent Solutions",
+    subtitle: "I build AI-driven, Machine Learning, and Data Analytics solutions to solve real-world problems.",
+  },
+  about: {
+    tag: "About Me",
+    title: "Translating Data into ",
+    titleHighlight: "Intelligent Solutions",
+    p1: "Hello! I'm Rizky Yusmansyah, a fresh graduate in Informatics from Universitas Syiah Kuala (USK) with a Cumlaude predicate. Originally from Aceh, I have a deep passion for solving complex problems through data.",
+    p2: "My focus lies at the intersection of Artificial Intelligence, Deep Learning, and Data Science. From classifying herbal plants using CNNs to analyzing land temperatures via Google Earth Engine.",
+    edu: "Education",
+    eduDesc: "B.Tech Informatics",
+    loc: "Location",
+    locDesc: "Banda Aceh, Indonesia",
+    focus: "Focus",
+    focusDesc: "AI & Data Science",
+  },
+  tech: {
+    tag: "Tech Stack",
+    title: "Tools & Technologies",
+  },
+  experience: {
+    tag: "Experience",
+    title: "Career Journey",
+    date1: "2023 - 2024",
+    title1: "Data Science Researcher",
+    desc1: "Conducted research on herbal plant image classification with CNN and geospatial data analysis.",
+  },
+  projects: {
+    tag: "Portfolio",
+    title: "Featured Projects",
+    viewDetail: "Click card to view details ↑",
+    sourceCode: "Source Code",
+    liveDemo: "Live Demo",
+  },
+  contact: {
+    tag: "Contact",
+    title: "Let's Collaborate",
+    subtitle: "Have a project, idea, or need help with data? Don't hesitate to reach out.",
+    nameLabel: "Full Name",
+    namePlaceholder: "Enter your name",
+    emailLabel: "Email Address",
+    emailPlaceholder: "name@email.com",
+    msgLabel: "Message",
+    msgPlaceholder: "Tell me about your project...",
+    send: "Send Message",
+  },
+  footer: {
+    tagline: "Turning ideas into useful things.",
+    rights: "All Rights Reserved.",
+  }
+};

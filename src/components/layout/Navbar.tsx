@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { useTheme } from '@/context/ThemeProvider';
-import { Sun, Moon } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
+import { Sun, Moon, Languages } from 'lucide-react';
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const { scrollYProgress } = useScroll();
   const { theme, setTheme } = useTheme();
+  const { language, t, toggleLanguage } = useLanguage();
 
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -24,11 +26,11 @@ export const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Tech', href: '#tech' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
+    { name: t.nav.about, href: '#about' },
+    { name: t.nav.tech, href: '#tech' },
+    { name: t.nav.experience, href: '#experience' },
+    { name: t.nav.projects, href: '#projects' },
+    { name: t.nav.contact, href: '#contact' },
   ];
 
   return (
@@ -65,13 +67,26 @@ export const Navbar = () => {
             ))}
           </nav>
 
-          <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="p-2 rounded-full bg-white/5 border border-black/10 dark:border-white/10 text-foreground hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
+          <div className="flex items-center gap-2">
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-black/10 dark:border-white/10 text-xs font-semibold text-foreground hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+              aria-label="Toggle language"
+            >
+              <Languages className="w-4 h-4" />
+              <span className="uppercase">{language}</span>
+            </button>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="p-2 rounded-full bg-white/5 border border-black/10 dark:border-white/10 text-foreground hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+          </div>
 
           {/* Mobile menu toggle (simple version) */}
           <button className="md:hidden text-foreground">

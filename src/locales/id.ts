@@ -1,0 +1,61 @@
+﻿export const id = {
+  nav: {
+    about: "Tentang",
+    tech: "Teknologi",
+    experience: "Pengalaman",
+    projects: "Proyek",
+    contact: "Kontak",
+  },
+  hero: {
+    greeting: "Halo! Saya",
+    title: "Mengubah Data Menjadi Solusi Cerdas",
+    subtitle: "Saya membangun solusi berbasis AI, Machine Learning, dan Analisis Data untuk memecahkan masalah nyata.",
+  },
+  about: {
+    tag: "Tentang Saya",
+    title: "Menerjemahkan Data Menjadi ",
+    titleHighlight: "Solusi Cerdas",
+    p1: "Halo! Saya Rizky Yusmansyah, lulusan baru S1 Informatika dari Universitas Syiah Kuala (USK) dengan predikat Cumlaude. Berasal dari Aceh, saya memiliki minat mendalam dalam memecahkan masalah kompleks melalui data.",
+    p2: "Fokus saya berada pada irisan Artificial Intelligence, Deep Learning, dan Data Science. Mulai dari mengklasifikasikan tanaman herbal menggunakan CNN hingga menganalisis suhu lahan via Google Earth Engine.",
+    edu: "Pendidikan",
+    eduDesc: "S1 Informatika",
+    loc: "Lokasi",
+    locDesc: "Banda Aceh",
+    focus: "Fokus",
+    focusDesc: "AI & Data Science",
+  },
+  tech: {
+    tag: "Tech Stack",
+    title: "Alat & Teknologi",
+  },
+  experience: {
+    tag: "Pengalaman",
+    title: "Perjalanan Karir",
+    date1: "2023 - 2024",
+    title1: "Peneliti Data Science",
+    desc1: "Melakukan penelitian klasifikasi citra tanaman herbal dengan CNN dan analisis data geospasial.",
+  },
+  projects: {
+    tag: "Portfolio",
+    title: "Proyek Unggulan",
+    viewDetail: "Klik kartu untuk lihat detail ↑",
+    sourceCode: "Kode Sumber",
+    liveDemo: "Live Demo",
+  },
+  contact: {
+    tag: "Kontak",
+    title: "Mari Berkolaborasi",
+    subtitle: "Punya proyek, ide, atau butuh bantuan dengan data? Mari hubungi saya.",
+    nameLabel: "Nama Lengkap",
+    namePlaceholder: "Masukkan nama",
+    emailLabel: "Alamat Email",
+    emailPlaceholder: "nama@email.com",
+    msgLabel: "Pesan",
+    msgPlaceholder: "Ceritakan proyek Anda...",
+    send: "Kirim Pesan",
+  },
+  footer: {
+    tagline: "Mengubah gagasan menjadi hal yang berguna.",
+    rights: "Seluruh Hak Cipta Dilindungi.",
+  }
+};

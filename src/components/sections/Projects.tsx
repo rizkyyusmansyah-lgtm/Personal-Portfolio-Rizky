@@ -1,6 +1,7 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects, type Project } from "@/data/projects";
+import { useLanguage } from '@/context/LanguageContext';
 import { ExternalLink, Github, X, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 // ── Project Detail Modal ──────────────────────────────────────────────────────
@@ -11,6 +12,8 @@ const ProjectModal = ({
   project: Project;
   onClose: () => void;
 }) => {
+  const { t } = useLanguage();
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
@@ -128,7 +131,7 @@ const ProjectModal = ({
                   }}
                 >
                   <Github className="w-4 h-4" />
-                  Source Code
+                  {t.projects.sourceCode}
                 </a>
               )}
               {project.link && (
@@ -140,7 +143,7 @@ const ProjectModal = ({
                   style={{ background: "#dc2626", color: "#fff" }}
                 >
                   <ExternalLink className="w-4 h-4" />
-                  Live Demo
+                  {t.projects.liveDemo}
                 </a>
               )}
             </div>
@@ -329,6 +332,7 @@ const SmallCard = ({
 
 // ── Main Section ──────────────────────────────────────────────────────────────
 export const Projects = () => {
+  const { t } = useLanguage();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [featuredIdx, setFeaturedIdx] = useState(0);
 
@@ -348,10 +352,10 @@ export const Projects = () => {
               className="text-xs font-mono tracking-[0.25em] mb-3 uppercase"
               style={{ color: "#dc2626" }}
             >
-              Portfolio
+              {t.projects.tag}
             </h2>
             <h3 className="text-3xl md:text-5xl font-bold text-white">
-              Featured Projects
+              {t.projects.title}
             </h3>
           </div>
 
@@ -421,7 +425,7 @@ export const Projects = () => {
                 color: "rgba(255,255,255,0.25)",
               }}
             >
-              Klik kartu untuk lihat detail ↑
+              {t.projects.viewDetail}
             </div>
           </div>
         </div>

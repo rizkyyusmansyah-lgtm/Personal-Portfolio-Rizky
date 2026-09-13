@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useMotionTemplate, useMotionValue, useSpring } from "framer-motion";
+import { useLanguage } from '@/context/LanguageContext';
 import { Database, LineChart, Code2, Globe2, BrainCircuit } from "lucide-react";
 
 // ── Tech icon map: name -> Simple Icons SVG path (filled, no viewBox needed)
@@ -270,18 +271,18 @@ const TiltCard = ({ category, index }: { category: typeof techCategories[0]; ind
   );
 };
 
-// ── Section ────────────────────────────────────────────────────────────────────
 export const TechStack = () => {
+  const { t } = useLanguage();
   return (
     <section id="tech" className="py-24 relative overflow-hidden bg-background">
       <div className="container mx-auto px-6 lg:px-12 max-w-6xl">
         {/* Heading */}
         <div className="text-center mb-16">
           <h2 className="text-sm font-mono tracking-[0.2em] text-primary uppercase mb-3">
-            Tech Stack
+            {t.tech.tag}
           </h2>
           <h3 className="text-3xl md:text-5xl font-heading font-bold text-white">
-            Tools &amp; Technologies
+            {t.tech.title}
           </h3>
         </div>
 

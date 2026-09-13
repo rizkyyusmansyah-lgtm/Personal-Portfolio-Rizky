@@ -1,6 +1,8 @@
 import { ArrowUp } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export const Footer = () => {
+  const { t, language } = useLanguage();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -11,10 +13,10 @@ export const Footer = () => {
         
         <div className="flex flex-col items-center md:items-start">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Rizky Yusmansyah. All rights reserved.
+            &copy; {new Date().getFullYear()} Rizky Yusmansyah. {t.footer.rights}
           </p>
           <p className="text-xs text-muted-foreground/60 mt-1">
-            Built with React, Vite, Tailwind CSS, & Framer Motion.
+            {language === 'id' ? 'Dibuat dengan React, Vite, Tailwind CSS, & Framer Motion.' : 'Built with React, Vite, Tailwind CSS, & Framer Motion.'}
           </p>
         </div>
 

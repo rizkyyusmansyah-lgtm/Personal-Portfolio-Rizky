@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ChevronDown, Sparkles } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 // ── Animation Variants ──────────────────────────────────────────
 const containerVariants = {
@@ -195,6 +196,7 @@ const ProfileVisual = () => (
 
 // ── Hero Section ─────────────────────────────────────────────────
 export const Hero = () => {
+  const { t, language } = useLanguage();
   return (
     <section
       id="hero"
@@ -238,7 +240,7 @@ export const Hero = () => {
             {/* Heading */}
             <motion.div variants={itemVariants} className="mb-2">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-foreground leading-[1.1] tracking-tight">
-                Hi, I'm
+                {t.hero.greeting}
               </h1>
             </motion.div>
 
@@ -263,9 +265,7 @@ export const Hero = () => {
               variants={itemVariants}
               className="text-muted-foreground text-base lg:text-lg leading-relaxed mb-10 max-w-lg"
             >
-              Fresh Graduate in Informatics from Universitas Syiah Kuala (Cumlaude, GPA 3.67). 
-              Passionate about building intelligent solutions through deep learning, data science, 
-              and geospatial analysis.
+              {t.hero.subtitle}
             </motion.p>
 
             {/* CTA Buttons */}
@@ -278,7 +278,7 @@ export const Hero = () => {
                 className="px-7 py-3 bg-foreground text-background font-bold rounded-full text-sm tracking-wide relative overflow-hidden group"
               >
                 <span className="relative z-10 group-hover:text-white transition-colors duration-300">
-                  Contact Me
+                  {language === 'id' ? 'Hubungi Saya' : 'Contact Me'}
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
               </motion.a>
@@ -290,7 +290,7 @@ export const Hero = () => {
                 transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                 className="px-7 py-3 bg-transparent border border-foreground/20 text-foreground font-semibold rounded-full text-sm tracking-wide backdrop-blur-sm hover:border-foreground/40 hover:bg-foreground/5 transition-colors duration-300"
               >
-                View Projects
+                {language === 'id' ? 'Lihat Proyek' : 'View Projects'}
               </motion.a>
             </motion.div>
           </motion.div>
