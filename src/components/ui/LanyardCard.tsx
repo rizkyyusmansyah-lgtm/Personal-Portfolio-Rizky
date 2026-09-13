@@ -67,9 +67,8 @@ export const LanyardCard = ({
     const canvas = canvasRef.current;
     const container = containerRef.current;
     if (!canvas || !container) return;
-    // Set a much larger height for the canvas to allow extreme pulling
     canvas.width  = container.clientWidth;
-    canvas.height = container.clientHeight + 400; // allow dragging out of bounds
+    canvas.height = container.clientHeight;
     initRope();
   }, [initRope]);
 
@@ -120,17 +119,20 @@ export const LanyardCard = ({
         const dx   = pts[i + 1].x - pts[i].x;
         const dy   = pts[i + 1].y - pts[i].y;
         const d    = Math.hypot(dx, dy) || 0.0001;
-        const diff = (d - SEG_LEN) / d * 0.95; // more rigid string
+        // Super elastic rubber band effect: 
+        // using a very low multiplier with high iterations creates a springy stretch.
+        const stiffness = isDragging.current ? 0.08 : 0.4; 
+        const diff = (d - SEG_LEN) / d * stiffness;
         const ox   = dx * diff * 0.5;
         const oy   = dy * diff * 0.5;
         if (i !== 0) { pts[i].x += ox; pts[i].y += oy; }
         pts[i + 1].x -= ox;
         pts[i + 1].y -= oy;
       }
-      // Relaxed bounds checking so we can pull it wildly
+      // Relaxed bounds checking so we can pull it wildly anywhere
       for (let i = 1; i < pts.length; i++) {
-        pts[i].x = Math.max(-100, Math.min(canvas.width + 100, pts[i].x));
-        pts[i].y = Math.max(0, pts[i].y);
+        pts[i].x = Math.max(-5000, Math.min(canvas.width + 5000, pts[i].x));
+        pts[i].y = Math.max(-5000, pts[i].y);
       }
     }
   }, []);
@@ -276,12 +278,12 @@ export const LanyardCard = ({
     cardAngleVelRef.current *= 0.89; // less damping = more free spin
     cardAngleRef.current    += cardAngleVelRef.current;
 
-    const newX = dx * 0.8;
+    const newX = dx;
     const newY = tail.y;
     
-    // Spring interpolate for smooth movement
-    cardPosRef.current.x = lerp(cardPosRef.current.x, newX, 0.6);
-    cardPosRef.current.y = lerp(cardPosRef.current.y, newY, 0.6);
+    // Lock card exactly to rope tail to prevent visual detachment
+    cardPosRef.current.x = newX;
+    cardPosRef.current.y = newY;
 
     setCardStyle({
       x:      cardPosRef.current.x,
