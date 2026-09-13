@@ -3,12 +3,12 @@ import { useEffect, useRef, useCallback, useState } from "react";
 interface Vec2 { x: number; y: number }
 
 // ── Physics constants ──────────────────────────────────────────────────────
-const GRAVITY       = 0.45;
-const DAMPING       = 0.90;
-const SEGMENT_COUNT = 18;
-const ITERATIONS    = 32;
-const SEG_LEN       = 15;
-const STRAP_WIDTH   = 20;
+const GRAVITY       = 0.55;
+const DAMPING       = 0.94; // slightly less damping for more swinging
+const SEGMENT_COUNT = 22; // more segments = more flexibility
+const ITERATIONS    = 40;
+const SEG_LEN       = 12; // shorter segments but more of them
+const STRAP_WIDTH   = 18;
 
 // Card size
 const CARD_W = 260;
@@ -23,7 +23,7 @@ interface LanyardCardProps {
 }
 
 export const LanyardCard = ({
-  photoSrc = "/image.png",
+  photoSrc = "/IMG_0005-merah.jpg",
   name     = "Rizky Yusmansyah",
 }: LanyardCardProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -41,6 +41,7 @@ export const LanyardCard = ({
   const mousePos      = useRef<Vec2>({ x: 0, y: 0 });
   const dragOffset    = useRef<Vec2>({ x: 0, y: 0 }); // offset when dragging card
   const [grabbed, setGrabbed] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   const cardAngleRef    = useRef(0);
   const cardAngleVelRef = useRef(0);
@@ -66,8 +67,9 @@ export const LanyardCard = ({
     const canvas = canvasRef.current;
     const container = containerRef.current;
     if (!canvas || !container) return;
+    // Set a much larger height for the canvas to allow extreme pulling
     canvas.width  = container.clientWidth;
-    canvas.height = container.clientHeight;
+    canvas.height = container.clientHeight + 400; // allow dragging out of bounds
     initRope();
   }, [initRope]);
 
@@ -96,8 +98,8 @@ export const LanyardCard = ({
     if (isDragging.current) {
       if (dragMode.current === "rope") {
         const di = dragIndex.current;
-        pts[di].x = lerp(pts[di].x, mousePos.current.x, 0.4);
-        pts[di].y = lerp(pts[di].y, mousePos.current.y, 0.4);
+        pts[di].x = lerp(pts[di].x, mousePos.current.x, 0.7); // stronger, more elastic pull
+        pts[di].y = lerp(pts[di].y, mousePos.current.y, 0.7);
       } else {
         // Card drag: move the last segment toward mouse (card centre)
         const target = {
@@ -105,8 +107,8 @@ export const LanyardCard = ({
           y: mousePos.current.y - dragOffset.current.y,
         };
         const last = pts.length - 1;
-        pts[last].x = lerp(pts[last].x, target.x, 0.4);
-        pts[last].y = lerp(pts[last].y, target.y, 0.4);
+        pts[last].x = lerp(pts[last].x, target.x, 0.85); // strong elastic pull
+        pts[last].y = lerp(pts[last].y, target.y, 0.85);
       }
     }
 
@@ -118,15 +120,16 @@ export const LanyardCard = ({
         const dx   = pts[i + 1].x - pts[i].x;
         const dy   = pts[i + 1].y - pts[i].y;
         const d    = Math.hypot(dx, dy) || 0.0001;
-        const diff = (d - SEG_LEN) / d * 0.88;
+        const diff = (d - SEG_LEN) / d * 0.95; // more rigid string
         const ox   = dx * diff * 0.5;
         const oy   = dy * diff * 0.5;
         if (i !== 0) { pts[i].x += ox; pts[i].y += oy; }
         pts[i + 1].x -= ox;
         pts[i + 1].y -= oy;
       }
+      // Relaxed bounds checking so we can pull it wildly
       for (let i = 1; i < pts.length; i++) {
-        pts[i].x = Math.max(STRAP_WIDTH, Math.min(canvas.width - STRAP_WIDTH, pts[i].x));
+        pts[i].x = Math.max(-100, Math.min(canvas.width + 100, pts[i].x));
         pts[i].y = Math.max(0, pts[i].y);
       }
     }
@@ -259,22 +262,34 @@ export const LanyardCard = ({
     // ── Card position update ──────────────────────────────────────────────────
     const tail = pts[pts.length - 1];
     const dx   = tail.x - canvas.width / 2;
-    const targetAngle = dx * 0.15;
-    cardAngleVelRef.current += (targetAngle - cardAngleRef.current) * 0.1;
-    cardAngleVelRef.current *= 0.82;
+    
+    // Calculate velocity for realistic spin
+    const vx = tail.x - prevPosRef.current[pts.length - 1].x;
+    const targetAngle = dx * 0.15 + vx * 2.0; 
+    
+    // Add interaction spin if grabbed
+    if (isDragging.current && dragMode.current === "card") {
+      cardAngleVelRef.current += vx * 0.3; 
+    }
+    
+    cardAngleVelRef.current += (targetAngle - cardAngleRef.current) * 0.08;
+    cardAngleVelRef.current *= 0.89; // less damping = more free spin
     cardAngleRef.current    += cardAngleVelRef.current;
 
-    const newX = dx * 0.6;
+    const newX = dx * 0.8;
     const newY = tail.y;
-    cardPosRef.current = { x: newX, y: newY };
+    
+    // Spring interpolate for smooth movement
+    cardPosRef.current.x = lerp(cardPosRef.current.x, newX, 0.6);
+    cardPosRef.current.y = lerp(cardPosRef.current.y, newY, 0.6);
 
     setCardStyle({
-      x:      newX,
-      y:      newY,
+      x:      cardPosRef.current.x,
+      y:      cardPosRef.current.y,
       rotate: cardAngleRef.current,
-      scale:  isDragging.current && dragMode.current === "card" ? 1.04 : 1,
+      scale:  isDragging.current && dragMode.current === "card" ? 1.05 : hovered ? 1.02 : 1,
     });
-  }, [name]);
+  }, [name, hovered]);
 
   // ── Loop ───────────────────────────────────────────────────────────────────
   const loop = useCallback(() => {
@@ -427,6 +442,8 @@ export const LanyardCard = ({
       >
         {/* Card shell */}
         <div
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
           style={{
             position:     "relative",
             borderRadius: "22px",
