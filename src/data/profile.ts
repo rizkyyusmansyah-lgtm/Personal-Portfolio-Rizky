@@ -1,9 +1,9 @@
 import type { Profile } from '@/types';
 
 export const profile: Profile = {
-  name: 'Rizky Yusmansyah',
-  title: 'Data Scientist & Data Analyst',
-  tagline: 'Turning Raw Data into Meaningful Insights',
+  name: 'RIZKY YUSMANSYAH',
+  title: 'Fresh Graduate Informatics Student at Universitas Syiah Kuala | AI & Machine Learning Enthusiast',
+  tagline: 'Passionate About Data & Technology',
   shortIntroduction:
     'Fresh graduate in Informatics with hands-on experience in Data Science, Data Analysis, and Machine Learning. Passionate about building end-to-end data workflows and creating impactful visualizations.',
   about:
@@ -15,7 +15,7 @@ export const profile: Profile = {
   linkedin: 'https://linkedin.com/in/rizky-yusmansyah',
   portfolioUrl: '',
   resumeUrl: '/cv_raza_fixed.pdf',
-  profilePhoto: '',
+  profilePhoto: '/IMG_0005-merah.jpg',
 
   // ── Statistics (shown in About section) ──
   stats: [

@@ -1,197 +1,84 @@
-import { useState, useCallback } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, FileText } from 'lucide-react';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import { Button } from '@/components/ui/Button';
-import { cn } from '@/lib/utils';
-import { scrollToSection, isPlaceholder } from '@/lib/utils';
-import { useScrolled, useScrollSpy } from '@/hooks/useScrollSpy';
-import { useTheme } from '@/hooks/useTheme';
-import { navItems, profile } from '@/data/profile';
+import { useState, useEffect } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import { useTheme } from '@/context/ThemeProvider';
+import { Sun, Moon } from 'lucide-react';
 
-export function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
-  const isScrolled = useScrolled(20);
-  const location = useLocation();
-  const isHomePage = location.pathname === '/';
+export const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const { theme, setTheme } = useTheme();
 
-  const sectionIds = navItems.map((item) => item.id);
-  const activeSection = useScrollSpy(sectionIds);
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
-  const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), []);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
 
-  const handleNavClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-      if (href.startsWith('#') && isHomePage) {
-        e.preventDefault();
-        const sectionId = href.slice(1);
-        scrollToSection(sectionId);
-        closeMobileMenu();
-      } else {
-        closeMobileMenu();
-      }
-    },
-    [isHomePage, closeMobileMenu]
-  );
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const hasResume = profile.resumeUrl && !isPlaceholder(profile.resumeUrl);
+  const navLinks = [
+    { name: 'About', href: '#about' },
+    { name: 'Tech', href: '#tech' },
+    { name: 'Experience', href: '#experience' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Contact', href: '#contact' },
+  ];
 
   return (
     <header
-      role="banner"
-      className={cn(
-        'fixed left-0 right-0 top-0 z-50 transition-all duration-300',
-        isScrolled
-          ? 'border-b border-slate-200/50 bg-white/90 shadow-sm backdrop-blur-md dark:border-slate-800/50 dark:bg-navy-900/90'
-          : 'bg-transparent'
-      )}
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+        scrolled ? 'bg-background/80 py-4 backdrop-blur-md shadow-sm border-b border-white/10 dark:border-white/5' : 'bg-transparent py-6'
+      }`}
     >
-      <nav
-        role="navigation"
-        aria-label="Main navigation"
-        className="section-container flex h-16 items-center justify-between"
-      >
-        {/* Logo / Name */}
-        <Link
-          to="/"
-          className="group flex items-center gap-2 font-bold text-slate-900 dark:text-slate-100"
-          aria-label="Home"
-        >
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-500 text-sm font-bold text-white transition-transform duration-200 group-hover:scale-110">
-            {profile.name === '[FULL_NAME]' ? 'P' : profile.name.charAt(0).toUpperCase()}
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary to-secondary origin-left"
+        style={{ scaleX }}
+      />
+      
+      <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between">
+        <a href="#" className="text-xl font-heading font-bold tracking-tighter text-foreground group flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-sm">
+            R
           </div>
-          <span className="hidden text-sm font-semibold sm:block">
-            {profile.name === '[FULL_NAME]' ? 'Portfolio' : profile.name.split(' ')[0]}
-          </span>
-        </Link>
+          <span>Rizky Yusmansyah</span>
+        </a>
 
-        {/* Desktop Nav */}
-        <ul className="hidden items-center gap-1 lg:flex" role="list">
-          {navItems.map((item) => {
-            const isActive = activeSection === item.id && isHomePage;
-            return (
-              <li key={item.id}>
-                <a
-                  href={isHomePage ? item.href : `/${item.href}`}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                  className={cn(
-                    'relative px-3 py-2 text-sm font-medium transition-colors duration-200',
-                    'rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500',
-                    isActive
-                      ? 'text-primary-500 dark:text-primary-400'
-                      : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100'
-                  )}
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  {item.label}
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-indicator"
-                      className="absolute inset-x-2 -bottom-px h-0.5 rounded-full bg-primary-500"
-                      transition={{ type: 'spring', bounce: 0.25, duration: 0.4 }}
-                    />
-                  )}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-
-        {/* Right Controls */}
-        <div className="flex items-center gap-2">
-          <ThemeToggle theme={theme} onToggle={toggleTheme} />
-
-          {hasResume && (
-            <a
-              href={profile.resumeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View resume (opens in new tab)"
-              className="hidden sm:block"
-            >
-              <Button variant="outline" size="sm" leftIcon={<FileText size={14} />}>
-                Resume
-              </Button>
-            </a>
-          )}
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
-            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 lg:hidden"
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.span
-                key={isMobileMenuOpen ? 'close' : 'open'}
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.15 }}
-                className="absolute"
+        <div className="flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
               >
-                {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-              </motion.span>
-            </AnimatePresence>
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
+              </a>
+            ))}
+          </nav>
+
+          <button
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="p-2 rounded-full bg-white/5 border border-black/10 dark:border-white/10 text-foreground hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </button>
+
+          {/* Mobile menu toggle (simple version) */}
+          <button className="md:hidden text-foreground">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
           </button>
         </div>
-      </nav>
-
-      {/* Mobile Menu Dropdown */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            id="mobile-menu"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="overflow-hidden border-t border-slate-200/50 bg-white/95 backdrop-blur-md dark:border-slate-800/50 dark:bg-navy-900/95 lg:hidden"
-          >
-            <nav aria-label="Mobile navigation" className="section-container py-4">
-              <ul className="space-y-1" role="list">
-                {navItems.map((item) => {
-                  const isActive = activeSection === item.id && isHomePage;
-                  return (
-                    <li key={item.id}>
-                      <a
-                        href={isHomePage ? item.href : `/${item.href}`}
-                        onClick={(e) => handleNavClick(e, item.href)}
-                        className={cn(
-                          'flex w-full items-center rounded-lg px-4 py-2.5 text-sm font-medium transition-colors',
-                          isActive
-                            ? 'bg-primary-50 text-primary-600 dark:bg-primary-500/10 dark:text-primary-400'
-                            : 'text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800'
-                        )}
-                        aria-current={isActive ? 'page' : undefined}
-                      >
-                        {item.label}
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-
-              {hasResume && (
-                <a
-                  href={profile.resumeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 block"
-                >
-                  <Button variant="primary" size="md" leftIcon={<FileText size={14} />} className="w-full">
-                    View Resume
-                  </Button>
-                </a>
-              )}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      </div>
     </header>
   );
-}
+};

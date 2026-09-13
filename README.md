@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Personal Portfolio Website
 
 A modern, professional personal portfolio website built with **React + Vite + TypeScript + Tailwind CSS**.
@@ -171,3 +172,6 @@ npm run build
 ## License
 
 MIT — Feel free to use and customize for your own portfolio.
+=======
+# Personal-Portfolio-Rizky
+>>>>>>> e2261116097d3af55a4eaf39aceded2d2b5461cc
