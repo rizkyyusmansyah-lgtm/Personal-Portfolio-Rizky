@@ -8,6 +8,7 @@ import { TechStack } from '@/components/sections/TechStack';
 import { ExperienceSection } from '@/components/sections/Experience';
 import { Projects } from '@/components/sections/Projects';
 import { Contact } from '@/components/sections/Contact';
+import { SectionDivider } from '@/components/ui/SectionDivider';
 import { ParticlesProvider } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
@@ -137,29 +138,31 @@ function App() {
             <Hero />
             
             {/* Added decorative section dividers and page transition wrappers */}
-            <div className="container mx-auto px-6 max-w-6xl">
-              <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent my-4" />
-            </div>
+            <SectionDivider />
             
             <PageSection id="about-section">
               <About />
             </PageSection>
             
+            <SectionDivider />
+            
             <PageSection id="tech-section">
               <TechStack />
             </PageSection>
+            
+            <SectionDivider />
             
             <PageSection id="experience-section">
               <ExperienceSection />
             </PageSection>
             
+            <SectionDivider />
+            
             <PageSection id="projects-section">
               <Projects />
             </PageSection>
             
-            <div className="container mx-auto px-6 max-w-6xl">
-              <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-secondary/20 to-transparent my-4" />
-            </div>
+            <SectionDivider />
 
             <PageSection id="contact-section">
               <Contact />
