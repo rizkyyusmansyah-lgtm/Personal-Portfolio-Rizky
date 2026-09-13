@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ChevronDown, Sparkles } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { AnimatedRobot } from '@/components/ui/AnimatedRobot';
 
 // ── Animation Variants ──────────────────────────────────────────
 const containerVariants = {
@@ -215,6 +216,11 @@ export const Hero = () => {
       {/* Ambient glow blobs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-red-600/4 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-red-600/3 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
+
+      {/* Animated Robot Background */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/4 opacity-10 lg:opacity-20 pointer-events-none z-0 scale-[1.5] lg:scale-[2]">
+        <AnimatedRobot />
+      </div>
 
       <div className="container mx-auto px-6 lg:px-16 max-w-7xl w-full py-24 lg:py-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
