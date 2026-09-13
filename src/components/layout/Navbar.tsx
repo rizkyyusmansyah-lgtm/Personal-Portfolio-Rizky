@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { useTheme } from '@/context/ThemeProvider';
 import { useLanguage } from '@/context/LanguageContext';
@@ -47,7 +47,7 @@ export const Navbar = () => {
       
       <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between">
         <a href="#" className="text-xl font-heading font-bold tracking-tighter text-foreground group flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-sm">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-primary-foreground text-sm">
             R
           </div>
           <span>Rizky Yusmansyah</span>

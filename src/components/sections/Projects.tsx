@@ -68,23 +68,13 @@ const ProjectModal = ({
             {/* Close */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center transition-colors"
-              style={{
-                background: "rgba(0,0,0,0.6)",
-                border: "1px solid rgba(255,255,255,0.15)",
-                color: "#fff",
-              }}
+              className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center transition-colors bg-black/60 border border-white/15 text-white backdrop-blur-md hover:bg-black/80"
             >
               <X className="w-4 h-4" />
             </button>
             {/* Category badge */}
             <span
-              className="absolute top-4 left-4 text-xs font-mono px-3 py-1 rounded-full"
-              style={{
-                background: "#dc2626",
-                color: "#fff",
-                letterSpacing: "0.08em",
-              }}
+              className="absolute top-4 left-4 text-xs font-mono px-3 py-1 rounded-full bg-red-600 text-white tracking-[0.08em]"
             >
               {project.category} · {project.year}
             </span>
@@ -92,10 +82,10 @@ const ProjectModal = ({
 
           {/* Content */}
           <div className="p-6 md:p-8">
-            <h3 className="text-2xl font-bold text-white mb-3">
+            <h3 className="text-2xl font-bold text-foreground mb-3">
               {project.title}
             </h3>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.6)" }}>
+            <p className="text-sm leading-relaxed mb-6 text-muted-foreground">
               {project.longDescription}
             </p>
 
@@ -104,12 +94,7 @@ const ProjectModal = ({
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 rounded-md text-xs font-mono"
-                  style={{
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    color: "rgba(255,255,255,0.6)",
-                  }}
+                  className="px-3 py-1 rounded-md text-xs font-mono text-muted-foreground border border-foreground/10 bg-secondary/30"
                 >
                   {tag}
                 </span>
@@ -123,12 +108,7 @@ const ProjectModal = ({
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all hover:opacity-80"
-                  style={{
-                    background: "rgba(255,255,255,0.08)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    color: "#fff",
-                  }}
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all hover:opacity-80 border border-foreground/10 bg-secondary/20 text-foreground"
                 >
                   <Github className="w-4 h-4" />
                   {t.projects.sourceCode}
@@ -139,8 +119,7 @@ const ProjectModal = ({
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all hover:opacity-80"
-                  style={{ background: "#dc2626", color: "#fff" }}
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all hover:opacity-80 bg-red-600 text-white"
                 >
                   <ExternalLink className="w-4 h-4" />
                   {t.projects.liveDemo}
@@ -170,19 +149,13 @@ const FeaturedCard = ({
     viewport={{ once: true }}
     transition={{ duration: 0.5 }}
     onClick={onClick}
-    className="relative cursor-pointer group rounded-2xl overflow-hidden"
-    style={{
-      height: "420px",
-      border: "1px solid rgba(255,255,255,0.08)",
-      background: "#0d0d0d",
-    }}
+    className="relative cursor-pointer group rounded-2xl overflow-hidden border border-foreground/10 h-[420px] bg-[#0d0d0d]"
   >
     {/* Background image */}
     <img
       src={project.image}
       alt={project.title}
-      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-      style={{ filter: "brightness(0.55)" }}
+      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 brightness-[0.55]"
     />
 
     {/* Gradient overlay */}
@@ -196,20 +169,14 @@ const FeaturedCard = ({
 
     {/* Index */}
     <span
-      className="absolute top-5 left-5 text-6xl font-bold leading-none select-none"
-      style={{ color: "rgba(255,255,255,0.08)", fontFamily: "Space Grotesk" }}
+      className="absolute top-5 left-5 text-6xl font-bold leading-none select-none text-foreground/10 font-['Space_Grotesk']"
     >
       0{index + 1}
     </span>
 
     {/* Category badge */}
     <span
-      className="absolute top-5 right-5 text-xs font-mono px-3 py-1 rounded-full"
-      style={{
-        background: "#dc2626",
-        color: "#fff",
-        letterSpacing: "0.06em",
-      }}
+      className="absolute top-5 right-5 text-xs font-mono px-3 py-1 rounded-full bg-red-600 text-white tracking-[0.06em]"
     >
       {project.category}
     </span>
@@ -217,27 +184,21 @@ const FeaturedCard = ({
     {/* Bottom content */}
     <div className="absolute bottom-0 left-0 right-0 p-6">
       <p
-        className="text-xs font-mono mb-2"
-        style={{ color: "rgba(255,255,255,0.45)", letterSpacing: "0.12em" }}
+        className="text-xs font-mono mb-2 text-muted-foreground tracking-[0.12em]"
       >
         {project.year}
       </p>
-      <h4 className="text-xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors">
+      <h4 className="text-xl font-bold text-foreground mb-2 group-hover:text-red-500 transition-colors">
         {project.title}
       </h4>
-      <p className="text-sm mb-4 line-clamp-2" style={{ color: "rgba(255,255,255,0.55)" }}>
+      <p className="text-sm mb-4 line-clamp-2 text-muted-foreground">
         {project.description}
       </p>
       <div className="flex flex-wrap gap-2">
         {project.tags.slice(0, 3).map((tag) => (
           <span
             key={tag}
-            className="px-2.5 py-0.5 rounded-md text-xs font-mono"
-            style={{
-              background: "rgba(255,255,255,0.08)",
-              border: "1px solid rgba(255,255,255,0.12)",
-              color: "rgba(255,255,255,0.6)",
-            }}
+            className="px-2.5 py-0.5 rounded-md text-xs font-mono text-muted-foreground border border-foreground/10 bg-secondary/30"
           >
             {tag}
           </span>
@@ -247,10 +208,9 @@ const FeaturedCard = ({
 
     {/* Hover arrow */}
     <div
-      className="absolute bottom-6 right-6 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0"
-      style={{ background: "#dc2626" }}
+      className="absolute bottom-6 right-6 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 bg-red-600"
     >
-      <ArrowUpRight className="w-5 h-5 text-white" />
+      <ArrowUpRight className="w-5 h-5 text-foreground" />
     </div>
   </motion.div>
 );
@@ -271,51 +231,37 @@ const SmallCard = ({
     viewport={{ once: true }}
     transition={{ duration: 0.4, delay: index * 0.08 }}
     onClick={onClick}
-    className="group cursor-pointer flex gap-4 items-start rounded-xl p-4 transition-all duration-300 hover:-translate-y-0.5"
-    style={{
-      background: "rgba(255,255,255,0.03)",
-      border: "1px solid rgba(255,255,255,0.07)",
-    }}
+    className="group cursor-pointer flex gap-4 items-start rounded-xl p-4 transition-all duration-300 hover:-translate-y-0.5 border border-foreground/10 bg-secondary/10"
   >
     {/* Thumbnail */}
     <div
-      className="flex-shrink-0 rounded-lg overflow-hidden"
-      style={{ width: "72px", height: "72px" }}
+      className="flex-shrink-0 rounded-lg overflow-hidden w-[72px] h-[72px]"
     >
       <img
         src={project.image}
         alt={project.title}
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-        style={{ filter: "brightness(0.7)" }}
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 brightness-[0.7]"
       />
     </div>
 
     {/* Text */}
     <div className="flex-1 min-w-0">
       <div className="flex items-start justify-between gap-2 mb-1">
-        <h5 className="text-sm font-bold text-white group-hover:text-red-400 transition-colors line-clamp-1">
+        <h5 className="text-sm font-bold text-foreground group-hover:text-red-500 transition-colors line-clamp-1">
           {project.title}
         </h5>
-        <span
-          className="text-xs font-mono flex-shrink-0"
-          style={{ color: "rgba(255,255,255,0.3)" }}
-        >
+        <span className="text-[11px] font-medium text-muted-foreground tracking-wider">
           0{index + 2}
         </span>
       </div>
-      <p className="text-xs mb-2 line-clamp-2" style={{ color: "rgba(255,255,255,0.45)" }}>
+      <p className="text-xs mb-2 line-clamp-2 text-muted-foreground">
         {project.description}
       </p>
       <div className="flex gap-1.5 flex-wrap">
         {project.tags.slice(0, 2).map((tag) => (
           <span
             key={tag}
-            className="px-2 py-0.5 rounded text-xs font-mono"
-            style={{
-              background: "rgba(220,38,38,0.12)",
-              color: "#f87171",
-              border: "1px solid rgba(220,38,38,0.2)",
-            }}
+            className="px-2 py-0.5 rounded text-xs font-mono bg-red-500/10 text-red-400 border border-red-500/20"
           >
             {tag}
           </span>
@@ -324,8 +270,7 @@ const SmallCard = ({
     </div>
 
     <ArrowUpRight
-      className="flex-shrink-0 w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity mt-0.5"
-      style={{ color: "#dc2626" }}
+      className="flex-shrink-0 w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity mt-0.5 text-red-600"
     />
   </motion.div>
 );
@@ -349,36 +294,29 @@ export const Projects = () => {
         <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
           <div>
             <h2
-              className="text-xs font-mono tracking-[0.25em] mb-3 uppercase"
-              style={{ color: "#dc2626" }}
+              className="text-xs font-mono tracking-[0.25em] mb-3 uppercase text-red-600"
             >
               {t.projects.tag}
             </h2>
-            <h3 className="text-3xl md:text-5xl font-bold text-white">
+            <h3 className="text-3xl md:text-5xl font-bold text-foreground">
               {t.projects.title}
             </h3>
           </div>
 
           {/* Nav arrows */}
           <div className="flex items-center gap-3">
-            <span className="text-sm font-mono" style={{ color: "rgba(255,255,255,0.3)" }}>
+            <span className="text-sm font-mono text-muted-foreground">
               0{featuredIdx + 1} / 0{projects.length}
             </span>
             <button
               onClick={prev}
-              className="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110"
-              style={{
-                border: "1px solid rgba(255,255,255,0.15)",
-                color: "#fff",
-                background: "rgba(255,255,255,0.04)",
-              }}
+              className="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110 border border-foreground/15 bg-secondary/20 text-foreground"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={next}
-              className="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110"
-              style={{ background: "#dc2626", color: "#fff" }}
+              className="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110 bg-red-600 text-white"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -419,11 +357,7 @@ export const Projects = () => {
 
             {/* View all hint */}
             <div
-              className="mt-2 pt-4 text-center text-xs font-mono tracking-widest uppercase"
-              style={{
-                borderTop: "1px solid rgba(255,255,255,0.07)",
-                color: "rgba(255,255,255,0.25)",
-              }}
+              className="mt-2 pt-4 text-center text-xs font-mono tracking-widest uppercase border-t border-foreground/10 text-muted-foreground/50"
             >
               {t.projects.viewDetail}
             </div>

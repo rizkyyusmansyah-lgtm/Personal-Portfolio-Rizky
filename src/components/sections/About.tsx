@@ -44,7 +44,7 @@ export const About = () => {
           {/* Text Column */}
           <motion.div variants={itemVariants} className="lg:col-span-7">
             <h2 className="text-sm font-mono tracking-[0.2em] text-primary uppercase mb-3">{t.about.tag}</h2>
-            <h3 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6">
+            <h3 className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-6">
               {t.about.title} <span className="text-gradient">{t.about.titleHighlight}</span>
             </h3>
             
@@ -60,7 +60,7 @@ export const About = () => {
                   <GraduationCap className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">{t.about.edu}</h4>
+                  <h4 className="text-foreground font-semibold mb-1">{t.about.edu}</h4>
                   <p className="text-sm text-muted-foreground whitespace-pre-line">{t.about.eduDesc}</p>
                 </div>
               </div>
@@ -70,7 +70,7 @@ export const About = () => {
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">{t.about.loc}</h4>
+                  <h4 className="text-foreground font-semibold mb-1">{t.about.loc}</h4>
                   <p className="text-sm text-muted-foreground">{t.about.locDesc}</p>
                 </div>
               </div>
@@ -80,7 +80,7 @@ export const About = () => {
                   <Sparkles className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">{t.about.focus}</h4>
+                  <h4 className="text-foreground font-semibold mb-1">{t.about.focus}</h4>
                   <p className="text-sm text-muted-foreground">{t.about.focusDesc}</p>
                 </div>
               </div>
@@ -90,7 +90,7 @@ export const About = () => {
                   <Briefcase className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">{language === 'id' ? 'Status' : 'Status'}</h4>
+                  <h4 className="text-foreground font-semibold mb-1">{language === 'id' ? 'Status' : 'Status'}</h4>
                   <p className="text-sm text-muted-foreground whitespace-pre-line">{language === 'id' ? 'Fresh Graduate\nTersedia untuk Bekerja' : 'Fresh Graduate\nAvailable for work'}</p>
                 </div>
               </div>

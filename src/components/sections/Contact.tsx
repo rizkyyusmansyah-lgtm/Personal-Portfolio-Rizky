@@ -18,7 +18,7 @@ export const Contact = () => {
       <div className="container mx-auto px-6 lg:px-12 max-w-5xl">
         <div className="text-center mb-16">
           <h2 className="text-sm font-mono tracking-[0.2em] text-primary uppercase mb-3">{t.contact.tag}</h2>
-          <h3 className="text-3xl md:text-5xl font-heading font-bold text-white">
+          <h3 className="text-3xl md:text-5xl font-heading font-bold text-foreground">
             {t.contact.title}
           </h3>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
@@ -41,7 +41,7 @@ export const Contact = () => {
               </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Email</p>
-                <a href="mailto:rizkyyusmansyah@gmail.com" className="text-lg font-medium text-white hover:text-primary transition-colors">
+                <a href="mailto:rizkyyusmansyah@gmail.com" className="text-lg font-medium text-foreground hover:text-primary transition-colors">
                   rizkyyusmansyah@gmail.com
                 </a>
               </div>
@@ -54,12 +54,12 @@ export const Contact = () => {
               <div className="flex-1">
                 <p className="text-sm text-muted-foreground mb-1">Phone</p>
                 <div className="flex items-center justify-between">
-                  <a href="tel:+6281211349840" className="text-lg font-medium text-white hover:text-primary transition-colors">
+                  <a href="tel:+6281211349840" className="text-lg font-medium text-foreground hover:text-primary transition-colors">
                     0812-1134-9840
                   </a>
                   <button 
                     onClick={handleCopyPhone}
-                    className="p-2 hover:bg-white/10 rounded-md transition-colors text-muted-foreground hover:text-white"
+                    className="p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-md transition-colors text-muted-foreground hover:text-foreground"
                     aria-label="Copy phone number"
                   >
                     {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
@@ -74,7 +74,7 @@ export const Contact = () => {
               </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-1">{language === 'id' ? 'Lokasi' : 'Location'}</p>
-                <p className="text-lg font-medium text-white">
+                <p className="text-lg font-medium text-foreground">
                   Banda Aceh, Indonesia
                 </p>
               </div>
@@ -91,31 +91,31 @@ export const Contact = () => {
             <form className="glass-card p-8 rounded-2xl space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium text-white/80">{t.contact.nameLabel}</label>
+                  <label htmlFor="name" className="text-sm font-medium text-foreground/80">{t.contact.nameLabel}</label>
                   <input 
                     type="text" 
                     id="name" 
                     placeholder={t.contact.namePlaceholder}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-white placeholder:text-muted-foreground/50"
+                    className="w-full px-4 py-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-foreground placeholder:text-muted-foreground/50"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium text-white/80">{t.contact.emailLabel}</label>
+                  <label htmlFor="email" className="text-sm font-medium text-foreground/80">{t.contact.emailLabel}</label>
                   <input 
                     type="email" 
                     id="email" 
                     placeholder={t.contact.emailPlaceholder}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-white placeholder:text-muted-foreground/50"
+                    className="w-full px-4 py-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-foreground placeholder:text-muted-foreground/50"
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium text-white/80">{t.contact.msgLabel}</label>
+                <label htmlFor="message" className="text-sm font-medium text-foreground/80">{t.contact.msgLabel}</label>
                 <textarea 
                   id="message" 
                   rows={5}
                   placeholder={t.contact.msgPlaceholder}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-white placeholder:text-muted-foreground/50 resize-none"
+                  className="w-full px-4 py-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-foreground placeholder:text-muted-foreground/50 resize-none"
                 />
               </div>
               <button 

@@ -277,7 +277,7 @@ export const Hero = () => {
                 transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                 className="px-7 py-3 bg-foreground text-background font-bold rounded-full text-sm tracking-wide relative overflow-hidden group"
               >
-                <span className="relative z-10 group-hover:text-white transition-colors duration-300">
+                <span className="relative z-10 group-hover:text-foreground transition-colors duration-300">
                   {language === 'id' ? 'Hubungi Saya' : 'Contact Me'}
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />

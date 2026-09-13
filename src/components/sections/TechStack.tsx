@@ -139,18 +139,7 @@ const IconMarquee = ({
           >
             {/* Icon */}
             <div
-              style={{
-                width:        "44px",
-                height:       "44px",
-                borderRadius: "12px",
-                background:   "rgba(255,255,255,0.06)",
-                border:       "1px solid rgba(255,255,255,0.1)",
-                display:      "flex",
-                alignItems:   "center",
-                justifyContent: "center",
-                backdropFilter: "blur(4px)",
-                flexShrink:   0,
-              }}
+              className="w-[44px] h-[44px] rounded-xl bg-black/5 dark:bg-white/[0.06] border border-foreground/10 flex items-center justify-center backdrop-blur-sm shrink-0"
             >
               <img
                 src={ICON_URL(skill.slug)}
@@ -171,17 +160,7 @@ const IconMarquee = ({
             </div>
             {/* Label */}
             <span
-              style={{
-                color:        "rgba(255,255,255,0.55)",
-                fontSize:     "9px",
-                textAlign:    "center",
-                lineHeight:   1.2,
-                maxWidth:     "60px",
-                overflow:     "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace:   "nowrap",
-                fontFamily:   "Inter, sans-serif",
-              }}
+              className="text-[9px] text-muted-foreground text-center leading-[1.2] max-w-[60px] truncate font-sans"
             >
               {skill.name}
             </span>
@@ -230,11 +209,10 @@ const TiltCard = ({ category, index }: { category: typeof techCategories[0]; ind
 
       {/* Card body – fixed height so all cards are equal */}
       <div
-        className="glass-card relative rounded-2xl overflow-hidden"
+        className="glass-card relative rounded-2xl overflow-hidden border border-white/[0.08]"
         style={{
           height:     "220px",
           background: `linear-gradient(135deg, ${category.accent} 0%, rgba(255,255,255,0.02) 100%)`,
-          border:     "1px solid rgba(255,255,255,0.08)",
         }}
       >
         {/* Header */}
@@ -248,18 +226,13 @@ const TiltCard = ({ category, index }: { category: typeof techCategories[0]; ind
           >
             {category.icon}
           </div>
-          <h4 className="text-base font-bold text-white tracking-tight">
+          <h4 className="text-base font-bold text-foreground tracking-tight">
             {category.title}
           </h4>
         </div>
 
-        {/* Divider */}
         <div
-          style={{
-            height:  "1px",
-            margin:  "0 20px",
-            background: "rgba(255,255,255,0.07)",
-          }}
+          className="h-[1px] mx-5 bg-foreground/10"
         />
 
         {/* Marquee icons */}
@@ -281,7 +254,7 @@ export const TechStack = () => {
           <h2 className="text-sm font-mono tracking-[0.2em] text-primary uppercase mb-3">
             {t.tech.tag}
           </h2>
-          <h3 className="text-3xl md:text-5xl font-heading font-bold text-white">
+          <h3 className="text-3xl md:text-5xl font-heading font-bold text-foreground">
             {t.tech.title}
           </h3>
         </div>
