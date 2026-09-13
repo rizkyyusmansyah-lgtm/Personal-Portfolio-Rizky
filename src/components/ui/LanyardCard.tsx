@@ -267,15 +267,18 @@ export const LanyardCard = ({
     
     // Calculate velocity for realistic spin
     const vx = tail.x - prevPosRef.current[pts.length - 1].x;
-    const targetAngle = dx * 0.15 + vx * 2.0; 
+    // Softer target angle to avoid sudden jerks
+    const targetAngle = dx * 0.1 + vx * 0.5; 
     
-    // Add interaction spin if grabbed
+    // Add interaction spin if grabbed, but keep it subtle
     if (isDragging.current && dragMode.current === "card") {
-      cardAngleVelRef.current += vx * 0.3; 
+      cardAngleVelRef.current += vx * 0.08; 
     }
     
-    cardAngleVelRef.current += (targetAngle - cardAngleRef.current) * 0.08;
-    cardAngleVelRef.current *= 0.89; // less damping = more free spin
+    // Softer spring for smoother, heavier-feeling rotation
+    cardAngleVelRef.current += (targetAngle - cardAngleRef.current) * 0.04;
+    // Smoother damping for elegant swinging
+    cardAngleVelRef.current *= 0.94; 
     cardAngleRef.current    += cardAngleVelRef.current;
 
     const newX = dx;
