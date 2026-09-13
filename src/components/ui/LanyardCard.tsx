@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useCallback, useState } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 
 interface Vec2 { x: number; y: number }
 
@@ -23,7 +23,7 @@ interface LanyardCardProps {
 }
 
 export const LanyardCard = ({
-  photoSrc = "/IMG_0005-merah.jpg",
+  photoSrc = "/image.png",
   name     = "Rizky Yusmansyah",
 }: LanyardCardProps) => {
   const containerRef = useRef<HTMLDivElement>(null);

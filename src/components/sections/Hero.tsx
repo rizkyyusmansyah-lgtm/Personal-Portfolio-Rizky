@@ -148,7 +148,7 @@ const ProfileVisual = () => (
         }}
       >
         <img
-          src="/IMG_0005-merah.jpg"
+          src="/image.png"
           alt="Rizky Yusmansyah"
           className="w-full h-full object-cover"
           loading="eager"

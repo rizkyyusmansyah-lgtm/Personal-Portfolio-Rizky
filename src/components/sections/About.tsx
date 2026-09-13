@@ -36,7 +36,7 @@ export const About = () => {
             <div className="absolute -z-10 -top-10 -left-10 w-40 h-40 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute -z-10 -bottom-10 -right-10 w-40 h-40 bg-red-600/8 rounded-full blur-3xl pointer-events-none" />
             <LanyardCard
-              photoSrc="/IMG_0005-merah.jpg"
+              photoSrc="/image.png"
               name="Rizky Yusmansyah"
             />
           </motion.div>

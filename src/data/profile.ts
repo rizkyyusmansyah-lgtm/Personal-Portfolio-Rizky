@@ -15,7 +15,7 @@ export const profile: Profile = {
   linkedin: 'https://linkedin.com/in/rizky-yusmansyah',
   portfolioUrl: '',
   resumeUrl: '/cv_raza_fixed.pdf',
-  profilePhoto: '/IMG_0005-merah.jpg',
+  profilePhoto: '/image.png',
 
   // ── Statistics (shown in About section) ──
   stats: [
